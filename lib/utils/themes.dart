@@ -12,9 +12,7 @@ class DenayaColors {
   static const Color textMore = Color(0xFF768895);
   static const Color grayStroke = Color(0xffBCC7CF);
   static const Color anggota = Color.fromARGB(255, 54, 110, 96);
-  static const Color stopWatch = Color(0xff419197);
-  static const Color situsRekomendasi = Color(0xff78D6C6);
-  static const Color favorite = Color.fromARGB(255, 252, 205, 205);
+  static const Color shadow = Color.fromARGB(255, 168, 178, 195);
 }
 
 class DenayaFonts extends DenayaColors {

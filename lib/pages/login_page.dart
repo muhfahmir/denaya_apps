@@ -1,4 +1,5 @@
 import 'package:denaya_apps/components/denaya_text_form_field.dart';
+import 'package:denaya_apps/components/loading.dart';
 import 'package:denaya_apps/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
@@ -18,20 +19,26 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   late bool _isValidation = false;
+  late bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(paddingScreen),
+    return Stack(
+      children: [
+        Scaffold(
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(paddingScreen),
+            child: SafeArea(
               child: Form(
                 key: _loginFormKey,
-                autovalidateMode: _isValidation
-                    ? AutovalidateMode.onUserInteraction
-                    : AutovalidateMode.disabled,
+                autovalidateMode: _isValidation ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -44,8 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                         )),
                     Text(
                       'Login in to continue',
-                      style: DenayaFonts(context).semiBoldQuicksand(
-                          size: 13, color: DenayaColors.black),
+                      style: DenayaFonts(context).semiBoldQuicksand(size: 13, color: DenayaColors.black),
                     ),
                     const SizedBox(height: 60),
                     const Image(
@@ -91,6 +97,14 @@ class _LoginPageState extends State<LoginPage> {
                           _isValidation = true;
                         });
                         if (_loginFormKey.currentState!.validate()) {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          Future.delayed((const Duration(milliseconds: 1000)), () {
+                            setState(() {
+                              _isLoading = false;
+                            });
+                          });
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MainPage()));
                         }
                       },
@@ -101,7 +115,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-      ),
+        LoadingScreen(loading: _isLoading),
+      ],
     );
   }
 }

@@ -20,7 +20,7 @@ AppBar myAppBar(
     actions: action,
     elevation: 0,
     automaticallyImplyLeading: automaticImplyLeading,
-    backgroundColor: DenayaColors.grey,
+    backgroundColor: Colors.transparent,
     leading: leading
         ? IconButton(
             icon: const Icon(Icons.arrow_back, color: DenayaColors.primary),

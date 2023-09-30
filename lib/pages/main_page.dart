@@ -1,3 +1,4 @@
+import 'package:denaya_apps/components/loading.dart';
 import 'package:denaya_apps/components/my_appbar.dart';
 import 'package:denaya_apps/pages/help_page.dart';
 import 'package:denaya_apps/pages/home_page.dart';
@@ -13,6 +14,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0; //New
+  late bool _isLoading = false;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -33,36 +35,55 @@ class _MainPageState extends State<MainPage> {
       }
     }
 
-    return Scaffold(
-      appBar: myAppBar(context,
-          title: 'Denaya Apps',
-          automaticImplyLeading: false,
-          action: [
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: myAppBar(context, title: 'Denaya Apps', automaticImplyLeading: false, action: [
             IconButton(
               icon: const Icon(
                 Icons.logout,
                 color: DenayaColors.red,
               ),
               onPressed: () {
+                setState(() {
+                  _isLoading = true;
+                });
+                Future.delayed((const Duration(milliseconds: 1000)), () {
+                  setState(() {
+                    _isLoading = false;
+                  });
+                });
                 Navigator.pop(context);
               },
             ),
           ]),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex, //New
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentIndex, //New
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: DenayaColors.primary,
+            backgroundColor: Colors.white,
+            elevation: 20,
+            iconSize: 32,
+            selectedFontSize: 12,
+            unselectedFontSize: 12,
+            unselectedItemColor: DenayaColors.grey,
+            showSelectedLabels: true,
+            onTap: _onItemTapped,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.help),
+                label: 'Bantuan',
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.help),
-            label: 'Bantuan',
-          ),
-        ],
-      ),
-      body: body(),
+          body: body(),
+        ),
+        LoadingScreen(loading: _isLoading)
+      ],
     );
   }
 }

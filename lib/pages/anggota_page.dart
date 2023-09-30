@@ -1,4 +1,5 @@
 import 'package:denaya_apps/components/my_appbar.dart';
+import 'package:denaya_apps/utils/themes.dart';
 import 'package:flutter/material.dart';
 
 class AnggotaPage extends StatefulWidget {
@@ -15,6 +16,11 @@ class _AnggotaPageState extends State<AnggotaPage> {
   // Daftar berisi informasi dari setiap developer.
   final List<Map<String, String>> developers = [
     {
+      'name': 'Athaya Rizqia Fitriani',
+      'nim': '124210071',
+      'image': 'assets/img/athaya.png',
+    },
+    {
       'name': 'Devita Khoirunnisa`i',
       'nim': '124210067',
       'image': 'assets/img/devita.png',
@@ -23,11 +29,6 @@ class _AnggotaPageState extends State<AnggotaPage> {
       'name': 'Nadira Nur Wiradatya',
       'nim': '124210068',
       'image': 'assets/img/nadira.png',
-    },
-    {
-      'name': 'Athaya Rizqia Fitriani',
-      'nim': '124210071',
-      'image': 'assets/img/athaya.png',
     }
   ];
 
@@ -36,8 +37,7 @@ class _AnggotaPageState extends State<AnggotaPage> {
     return Scaffold(
       appBar: myAppBar(context, title: 'Daftar Anggota', leading: true),
       body: PageView.builder(
-        itemCount:
-            developers.length, // Total halaman berdasarkan jumlah developer.
+        itemCount: developers.length, // Total halaman berdasarkan jumlah developer.
         onPageChanged: (index) {
           setState(() {
             currentPage = index; // Memperbarui index saat halaman digeser.
@@ -50,18 +50,17 @@ class _AnggotaPageState extends State<AnggotaPage> {
               children: <Widget>[
                 CircleAvatar(
                   radius: 100.0,
-                  backgroundImage: AssetImage(developers[index]['image'] ??
-                      'path_to_default_image.png'), // Menampilkan gambar developer.
+                  backgroundImage: AssetImage(developers[index]['image'] ?? 'path_to_default_image.png'), // Menampilkan gambar developer.
                 ),
                 const SizedBox(height: 10),
                 Text(
                   'Nama: ${developers[index]['name']}', // Menampilkan nama developer.
-                  style: TextStyle(fontSize: 20),
+                  style: DenayaFonts(context).semiBoldQuicksand(size: 20),
                 ),
                 const SizedBox(height: 5),
                 Text(
                   'NIM: ${developers[index]['nim']}', // Menampilkan NIM developer.
-                  style: TextStyle(fontSize: 18),
+                  style: DenayaFonts(context).semiBoldQuicksand(size: 18),
                 ),
               ],
             ),
