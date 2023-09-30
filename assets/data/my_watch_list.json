@@ -1,0 +1,24 @@
+[{
+        "price": 626000,
+        "pnl": 31.22,
+        "name": "Company Name",
+        "hk": "0001.HK"
+    },
+    {
+        "price": 26000,
+        "pnl": 20.27,
+        "name": "Company Name",
+        "hk": "0002.HK"
+    },
+    {
+        "price": 21000,
+        "pnl": 15.02,
+        "name": "Company Name",
+        "hk": "001.HK"
+    }, {
+        "price": 66000,
+        "pnl": 10.17,
+        "name": "Company Name",
+        "hk": "0025.HK"
+    }
+]
