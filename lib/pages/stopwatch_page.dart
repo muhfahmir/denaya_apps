@@ -33,17 +33,17 @@ class _StopwatchPageState extends State<StopwatchPage> {
   }
 
   void startTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
+    timer = Timer.periodic(const Duration(milliseconds: 1), (_) => addTime());
   }
 
   void addTime() {
-    final addSeconds = countDown ? 1 : -1;
+    final addMiliseconds = countDown ? 1 : -1;
     setState(() {
-      final seconds = duration.inSeconds + addSeconds;
-      if (seconds < 0) {
+      final miliseconds = duration.inMilliseconds + addMiliseconds;
+      if (miliseconds < 0) {
         timer?.cancel();
       } else {
-        duration = Duration(seconds: seconds);
+        duration = Duration(milliseconds: miliseconds);
       }
     });
   }
@@ -77,19 +77,19 @@ class _StopwatchPageState extends State<StopwatchPage> {
 
     Widget buildTime() {
       String twoDigits(int n) => n.toString().padLeft(2, '0');
-      final hours = twoDigits(duration.inHours);
       final minutes = twoDigits(duration.inMinutes.remainder(60));
       final seconds = twoDigits(duration.inSeconds.remainder(60));
+      final milisecons = twoDigits(duration.inMilliseconds.remainder(1000));
       return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        buildTimeCard(time: hours, header: 'HOURS'),
-        const SizedBox(
-          width: 8,
-        ),
         buildTimeCard(time: minutes, header: 'MINUTES'),
         const SizedBox(
           width: 8,
         ),
         buildTimeCard(time: seconds, header: 'SECONDS'),
+        const SizedBox(
+          width: 8,
+        ),
+        buildTimeCard(time: milisecons, header: 'MILISECONDS'),
       ]);
     }
 

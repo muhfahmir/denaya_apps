@@ -1,11 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:denaya_apps/components/denaya_text_form_field.dart';
 import 'package:denaya_apps/components/loading.dart';
 import 'package:denaya_apps/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
+import '../components/flushbar.dart';
 import '../components/primary_button.dart';
 import '../utils/themes.dart';
-import '../utils/variable.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,12 +21,12 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _usernameController.dispose();
+  //   _passwordController.dispose();
+  //   super.dispose();
+  // }
 
   late bool _isValidation = false;
   late bool _isLoading = false;
@@ -34,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         Scaffold(
           body: SingleChildScrollView(
-            padding: const EdgeInsets.all(paddingScreen),
+            padding: const EdgeInsets.all(20),
             child: SafeArea(
               child: Form(
                 key: _loginFormKey,
@@ -90,9 +92,8 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 30),
                     PrimaryButton(
                       text: 'LOGIN',
-                      onTap: () {
+                      onTap: () async {
                         FocusScope.of(context).requestFocus(FocusNode());
-
                         setState(() {
                           _isValidation = true;
                         });
@@ -100,12 +101,18 @@ class _LoginPageState extends State<LoginPage> {
                           setState(() {
                             _isLoading = true;
                           });
-                          Future.delayed((const Duration(milliseconds: 1000)), () {
+                          await Future.delayed((const Duration(seconds: 1)), () {
                             setState(() {
                               _isLoading = false;
                             });
                           });
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MainPage()));
+
+                          // ignore: unrelated_type_equality_checks
+                          if (_usernameController.text == 'admin' && _passwordController.text == 'admin') {
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainPage()));
+                          } else {
+                            alert(context, text: 'Username dan Password salah', icon: Icons.error);
+                          }
                         }
                       },
                     ),

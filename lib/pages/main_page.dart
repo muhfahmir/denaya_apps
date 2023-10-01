@@ -1,9 +1,12 @@
 import 'package:denaya_apps/components/loading.dart';
 import 'package:denaya_apps/components/my_appbar.dart';
+import 'package:denaya_apps/db/shared_prefrences.dart';
 import 'package:denaya_apps/pages/help_page.dart';
 import 'package:denaya_apps/pages/home_page.dart';
-import 'package:denaya_apps/utils/utils.dart';
+import 'package:denaya_apps/pages/login_page.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/themes.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -20,6 +23,12 @@ class _MainPageState extends State<MainPage> {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    DBHelper().setPreferences();
+    super.initState();
   }
 
   @override
@@ -44,16 +53,17 @@ class _MainPageState extends State<MainPage> {
                 Icons.logout,
                 color: DenayaColors.red,
               ),
-              onPressed: () {
+              onPressed: () async {
                 setState(() {
                   _isLoading = true;
                 });
-                Future.delayed((const Duration(milliseconds: 1000)), () {
+                await Future.delayed((const Duration(seconds: 2)), () {
                   setState(() {
                     _isLoading = false;
                   });
                 });
-                Navigator.pop(context);
+                // ignore: use_build_context_synchronously
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginPage()));
               },
             ),
           ]),

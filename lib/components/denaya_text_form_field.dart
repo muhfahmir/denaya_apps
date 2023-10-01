@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../utils/utils.dart';
+
+import '../utils/themes.dart';
 
 class DenayaTextFormField extends StatefulWidget {
   final String? label;
   final bool? noLabel;
   final String? hint;
   final TextEditingController controller;
-  final String? Function(String?)?  validator;
+  final String? Function(String?)? validator;
   final bool? password;
   final TextCapitalization? capitalization;
   final TextInputType? keyboardType;
@@ -50,27 +51,20 @@ class _DenayaTextFormFieldState extends State<DenayaTextFormField> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        widget.noLabel != null 
-            ? const SizedBox()
-            : Text(widget.label!, style: DenayaFonts(context).labelTextField),
+        widget.noLabel != null ? const SizedBox() : Text(widget.label!, style: DenayaFonts(context).labelTextField),
         widget.noLabel != null ? const SizedBox() : const SizedBox(height: 10),
         TextFormField(
           maxLength: widget.maxLength,
           maxLines: widget.maxLinex,
           readOnly: widget.readOnly!,
-          autovalidateMode: widget.autovalidateMode != null
-              ? AutovalidateMode.onUserInteraction
-              : AutovalidateMode.disabled,
+          autovalidateMode: widget.autovalidateMode != null ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
           inputFormatters: [
-            widget.typeInput == 'number'
-                ? FilteringTextInputFormatter.digitsOnly
-                : FilteringTextInputFormatter.deny(RegExp("[/\\\\]")),
+            widget.typeInput == 'number' ? FilteringTextInputFormatter.digitsOnly : FilteringTextInputFormatter.deny(RegExp("[/\\\\]")),
           ],
           cursorColor: DenayaColors.primary,
           obscureText: widget.password! ? _obscureText : false,
@@ -81,8 +75,7 @@ class _DenayaTextFormFieldState extends State<DenayaTextFormField> {
           textInputAction: widget.textInputAction ?? TextInputAction.done,
           style: DenayaFonts(context).textField,
           decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.fromLTRB(5, 13, 0, 0),
+            contentPadding: const EdgeInsets.fromLTRB(5, 13, 0, 0),
             suffixIcon: widget.suffix!
                 ? GestureDetector(
                     onTap: () {
@@ -92,9 +85,7 @@ class _DenayaTextFormFieldState extends State<DenayaTextFormField> {
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8),
-                      child: _obscureText
-                          ? const Icon(Icons.visibility_off)
-                          : const Icon(Icons.visibility),
+                      child: _obscureText ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
                     ),
                   )
                 : const SizedBox(),

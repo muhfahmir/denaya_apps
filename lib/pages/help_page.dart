@@ -9,7 +9,7 @@ class HelpPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

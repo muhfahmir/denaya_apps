@@ -4,10 +4,10 @@ class DenayaColors {
   static const Color black = Color(0xff2D3D49);
   static const Color primary = Color(0xFF4CA4DF);
   static const Color secondary = Color(0xFF90C3EB);
-  static const Color lightPrimary = Color(0xffe1eef1);
+  static const Color lightPrimary = Color.fromARGB(255, 204, 220, 224);
   static const Color background = Colors.white;
   static const Color red = Color(0xffD3546E);
-  static const Color grey = Color(0xffDEE6ED);
+  static const Color grey = Color.fromARGB(255, 196, 203, 209);
   static const Color greyMore = Color(0xFFDDE6ED);
   static const Color textMore = Color(0xFF768895);
   static const Color grayStroke = Color(0xffBCC7CF);
