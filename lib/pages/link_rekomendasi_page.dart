@@ -109,7 +109,7 @@ class _LinkRekomendasiPageState extends State<LinkRekomendasiPage> {
     return Scaffold(
       appBar: myAppBar(context, title: 'Link Rekomendasi', leading: true),
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.all(20),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // Jumlah kolom yang diinginkan
@@ -125,7 +125,7 @@ class _LinkRekomendasiPageState extends State<LinkRekomendasiPage> {
                   _launchURL(Uri.parse(linkRekomendations[index]['link']));
                 },
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,

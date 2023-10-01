@@ -63,7 +63,7 @@ class _FavoritePageState extends State<FavoritePage> {
                     _launchURL(Uri.parse(data[index]['link']));
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
