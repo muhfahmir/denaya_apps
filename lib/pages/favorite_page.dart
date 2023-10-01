@@ -99,7 +99,7 @@ class _FavoritePageState extends State<FavoritePage> {
                                 setState(() {
                                   _loadItems();
                                 });
-                                alert(context, icon: Icons.delete, color: Colors.red, text: 'Data berhasil di hapus');
+                                alert(context, icon: Icons.delete, color: Colors.red, text: 'Data ${data[index]['name']} berhasil di hapus');
                               },
                               icon: const Icon(Icons.delete, color: Colors.red),
                             )

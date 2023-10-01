@@ -124,17 +124,22 @@ class _LinkRekomendasiPageState extends State<LinkRekomendasiPage> {
                           Text(linkRekomendations[index]['name'], style: DenayaFonts(context).boldQuicksand(size: 16)),
                           IconButton(
                             onPressed: () {
-                              if (!items.contains(linkRekomendations[index])) {
+                              if (items.every((item) => item['id'] != linkRekomendations[index]['id'])) {
                                 setState(() {
                                   items.add(linkRekomendations[index]);
                                 });
                                 SaveToLocalDb.setString('favorite', jsonEncode(items));
-                                alert(context, icon: Icons.check, color: Colors.green, text: 'Berhasil di tambahkan ke Favorite');
+                                alert(context, icon: Icons.check, color: Colors.green, text: 'Data ${linkRekomendations[index]['name']} berhasil di tambahkan');
                               } else {
-                                alert(context, icon: Icons.warning, color: Colors.yellow, text: 'Maaf data sudah ada di Favorite');
+                                items.removeWhere((item) => item['id'] == linkRekomendations[index]['id']);
+                                alert(context, icon: Icons.delete, color: Colors.red, text: 'Data ${linkRekomendations[index]['name']} berhasil di hapus');
+                                SaveToLocalDb.setString('favorite', jsonEncode(items));
+                                setState(() {
+                                  _loadItems();
+                                });
                               }
                             },
-                            icon: const Icon(Icons.favorite_border, color: Colors.red),
+                            icon: Icon(items.every((item) => item['id'] != linkRekomendations[index]['id']) ? Icons.favorite_border : Icons.favorite, color: Colors.red),
                           )
                         ],
                       ),

@@ -11,19 +11,18 @@ class DenayaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Denaya Apps',
       theme: ThemeData(
-          fontFamily: 'QuicksandRegular',
-          bottomSheetTheme:
-              const BottomSheetThemeData(backgroundColor: Colors.transparent),
-          scaffoldBackgroundColor: Colors.white,
-          primaryColor: DenayaColors.primary,
-          focusColor: DenayaColors.primary,
-          dividerColor: Colors.transparent,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        fontFamily: 'QuicksandRegular',
+        bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.transparent),
+        scaffoldBackgroundColor: Colors.white,
+        primaryColor: DenayaColors.primary,
+        focusColor: DenayaColors.primary,
+        dividerColor: Colors.transparent,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: const LoginPage(),
     );
   }
